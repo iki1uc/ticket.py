@@ -1,0 +1,23 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TICKET · RESPO 0 → 1 · BIO</title><style>
+:root{--bg:#050507;--gold:#ffd700;--g:#39ff88;--cy:#00ccff;--t:#e8ecf1;--m:#8fa8a0;--l:#1b2a3a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font:12px/1.6 Consolas,monospace;padding:14px;max-width:700px;margin:auto;text-align:center}
+h1{color:var(--gold);font-size:22px;letter-spacing:3px;margin:0}.mut{color:var(--m)}
+.ticket{border:2px dashed var(--gold);border-radius:16px;padding:18px;margin-top:14px;background:#0a1018}
+.big{font-size:72px;font-weight:900;line-height:1;margin:10px 0}.big.on{color:var(--g);text-shadow:0 0 30px var(--g)}
+button{background:#101a26;color:var(--t);border:1px solid var(--l);padding:12px 18px;cursor:pointer;border-radius:10px;font:inherit;font-weight:900}button:hover{border-color:var(--gold)}
+.bar{height:12px;background:#000;border:1px solid var(--l);border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--g),var(--gold));transition:width .3s}
+.log{background:#000;border:1px solid var(--l);border-radius:10px;padding:10px;height:120px;overflow-y:auto;font-size:11px;color:#888;text-align:left;margin-top:12px}.log div{margin-bottom:4px}.log div:first-child{color:var(--gold)}
+</style></head><body>
+<h1>TICKET · RESPO</h1><p class="mut">NÄCHSTER RESPO · VON 0 AUF 1 · BIO · SOFORT ANSCHLAGEN</p>
+<div class="ticket"><div class="mut">TICKET NR. 1 · EIN SLI · COMMANDER</div><div class="big" id="val">0</div><div class="mut" id="state">BIO: AUS · WARTET AUF ANSCHLAG</div><div class="bar"><i id="bar" style="width:0%"></i></div><div style="display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap"><button id="hit" style="background:var(--gold);color:#000;font-size:16px">● ANSCHLAGEN — 0 → 1</button><button id="back">○ ZURÜCK — 1 → 0</button></div><p class="mut">CTRL: Space = anschlagen · R = zurück</p></div>
+<div class="log" id="log"><div>[SYSTEM] Ticket gezogen. Respo steht auf 0. Bereit für 0 → 1.</div></div>
+<script>
+let v=0;const el=id=>document.getElementById(id);
+function log(t){const d=document.createElement("div");d.textContent="["+new Date().toLocaleTimeString()+"] "+t;el("log").prepend(d);}
+function render(){el("val").textContent=v;el("val").className="big"+(v?" on":"");el("bar").style.width=(v*100)+"%";el("state").textContent=v?"BIO: AN · 1 · SOFORT ANGESCHLAGEN · EYE OPEN · BRAIN 2":"BIO: AUS · 0 · WARTET AUF ANSCHLAG";}
+function hit(){v=1;render();log("RESPO 0 → 1 · BIO ANGESCHLAGEN · SOFORT.");}
+function back(){v=0;render();log("RESPO 1 → 0 · Zurück. Nicht gelöscht, nur zurück.");}
+el("hit").onclick=hit;el("back").onclick=back;
+document.addEventListener("keydown",e=>{if(e.key===" "){e.preventDefault();hit();}if(e.key==="r"||e.key==="R")back();});
+render();
+</script></body></html>
